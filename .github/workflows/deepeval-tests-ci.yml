@@ -18,7 +18,7 @@ on:
 env:
   OLLAMA_API_KEY: ${{ secrets.OLLAMA_API_KEY }}
   OLLAMA_BASE_URL: ${{ secrets.OLLAMA_BASE_URL }}
-  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  # DeepEval judge uses Ollama Cloud (see deepeval-tests/conftest.py), not OpenAI.
 
 jobs:
   deepeval:

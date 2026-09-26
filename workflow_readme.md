@@ -21,21 +21,22 @@
   - Jobs: Single job that installs Python deps, starts the backend via docker compose, waits for health, runs all 4 DeepEval test suites, then tears down
   - Pipeline: LLM evaluation pipeline using Python 3.12 + DeepEval
   judge model
-  - Required secrets: OLLAMA_API_KEY, OLLAMA_BASE_URL, OPENAI_API_KEY
+  - Required secrets: OLLAMA_API_KEY, OLLAMA_BASE_URL
+    (DeepEval judge uses Ollama Cloud glm-5.2 — OPENAI_API_KEY is not required)
   Required GitHub Repository Secrets
   You'll need to add these secrets in your repo settings (Settings >
   Secrets and variables > Actions):
   Secret: OLLAMA_API_KEY
-  Used By: promptfoo, deepeval
+  Used By: promptfoo, deepeval, docker compose backend
   Purpose: Authenticate with Ollama cloud API
   ────────────────────────────────────────
   Secret: OLLAMA_BASE_URL
-  Used By: promptfoo, deepeval
-  Purpose: Ollama cloud endpoint URL
+  Used By: promptfoo, deepeval, docker compose backend
+  Purpose: Ollama cloud endpoint URL (e.g. https://ollama.com)
   ────────────────────────────────────────
-  Secret: OPENAI_API_KEY
-  Used By: deepeval only
-  Purpose: DeepEval's judge LLM for evaluation metrics
+  Secret: DOCKERHUB_TOKEN
+  Used By: llm-multiroute CI, llm-frontend-python CI
+  Purpose: Push scanned images to Docker Hub as sharonnus/*
 
 ## Updated pipeline stages
 

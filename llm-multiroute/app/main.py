@@ -9,8 +9,9 @@ try:
         enable_metrics=False,
         use_remote_inferencing=False,
     )
-except Exception:
-    pass
+except Exception:  # noqa: BLE001
+    # Guardrails is optional at import time; ignore missing/broken hub config.
+    pass  # noqa: S110
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

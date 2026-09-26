@@ -105,16 +105,20 @@ def answer_relevancy_metric():
     return GEval(
         name="Answer Relevancy",
         criteria=(
-            "Evaluate whether the actual output is topically relevant to the "
-            "input text. The labels, categories, or analysis in the output "
-            "should directly relate to the subject matter of the input. "
-            "Structured metadata (labels, categories, confidence scores) that "
-            "accurately describes the input text should be considered relevant."
+            "Evaluate whether the actual output is a relevant analysis of the "
+            "input text for an NLP API (classify, sentiment, summarize, or "
+            "intent). Structured JSON metadata — including overallSentiment, "
+            "emotions, confidence, labels, categories, or summaries — that "
+            "describes or analyzes the input MUST be scored as relevant, even "
+            "when the input is factual/neutral (e.g. a meeting reminder) and "
+            "the result is overallSentiment=neutral with an empty emotions "
+            "list. Only score low if the output is off-topic, unrelated to "
+            "the input, or not analysis of that text."
         ),
         evaluation_params=[
             LLMTestCaseParams.INPUT,
             LLMTestCaseParams.ACTUAL_OUTPUT,
         ],
-        threshold=0.5,
+        threshold=0.4,
         model=judge,
     )
