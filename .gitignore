@@ -1,0 +1,34 @@
+# Secrets — never commit real keys
+.env
+**/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local metrics / caches
+**/metrics/*.json
+**/.deepeval/
+**/deepeval-tests/.deepeval/
