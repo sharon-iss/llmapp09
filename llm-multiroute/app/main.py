@@ -1,5 +1,7 @@
 # Disable Guardrails Hub telemetry BEFORE Guard/validator imports.
 # Do NOT set OTEL_SDK_DISABLED globally — that also disables Langfuse.
+import logging
+
 try:
     from guardrails.classes.rc import RC
     from guardrails.settings import settings as guardrails_settings
@@ -9,9 +11,10 @@ try:
         enable_metrics=False,
         use_remote_inferencing=False,
     )
-except Exception:  # noqa: BLE001
-    # Guardrails is optional at import time; ignore missing/broken hub config.
-    pass  # noqa: S110
+except (ImportError, AttributeError, TypeError, ValueError) as exc:
+    logging.getLogger(__name__).debug(
+        "Guardrails telemetry disable skipped: %s", exc
+    )
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
